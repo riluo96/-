@@ -1,0 +1,300 @@
+
+
+
+
+-- 设置调试钩子：监控函数调用（"c"）和返回（"r"）
+debug.sethook(function(event, line)
+    if event == "call" then
+        -- 获取当前调用的函数名
+        local func = debug.getinfo(2, "f").func
+        local name = debug.getinfo(2, "n").name or "匿名函数"
+        -- 无痕处理：去掉日志输出，仅执行必要逻辑
+        -- print("函数调用:", name)
+    end
+end, "cr")  -- "c"=调用时触发，"r"=返回时触发
+
+-- 测试函数
+local function test()
+    print("函数执行中")
+end
+
+test()  -- 调用时会被hook监控，但无额外输出
+
+if not load_fun.gg  then--判断是否加载成功
+print("内存读写库加载失败!")
+os.exit()
+end
+
+
+local playMusic=load_fun["playMusic"]--加载播放音频函数库
+if not playMusic  then--判断是否加载成功
+print("音乐播放函数加载失败!")
+os.exit()
+end
+
+
+
+-------------------设置你要读写内存的进程----------------
+local package = {
+["package"]="com.tencent.ig",
+--替换为你的目标进程的可以填写包名 或 PID
+--和平精英通常可以用模式3
+["mem"]="2",--内存读写模式。(通常情况下模式3兼容性与效率最佳)   
+--【注意，如果发现不能写入内存更换2或1模式即可】
+--你想使用的内存读写方式目前支持3种
+--模式1
+--模式2
+--模式3
+}
+local pid,isarm64=gg.setProcess(package)--返回PID 与 进程位数
+if pid ==  false then
+print(string.format("该程序<%s>未运行!",package.package))
+else
+print(string.format("进程PID[%s]  是否为64位[%s]",pid,isarm64))
+end
+
+local package = {
+["package"]="com.pubg.krmobile",
+--替换为你的目标进程的可以填写包名 或 PID
+--和平精英通常可以用模式3
+["mem"]="2",--内存读写模式。(通常情况下模式3兼容性与效率最佳)   
+--【注意，如果发现不能写入内存更换2或1模式即可】
+--你想使用的内存读写方式目前支持3种
+--模式1
+--模式2
+--模式3
+}
+local pid,isarm64=gg.setProcess(package)--返回PID 与 进程位数
+if pid ==  false then
+print(string.format("该程序<%s>未运行!",package.package))
+else
+print(string.format("进程PID[%s]  是否为64位[%s]",pid,isarm64))
+end
+
+
+local package = {
+["package"]="com.rekoo.pubgm",
+--替换为你的目标进程的可以填写包名 或 PID
+--和平精英通常可以用模式3
+["mem"]="2",--内存读写模式。(通常情况下模式3兼容性与效率最佳)   
+--【注意，如果发现不能写入内存更换2或1模式即可】
+--你想使用的内存读写方式目前支持3种
+--模式1
+--模式2
+--模式3
+}
+local pid,isarm64=gg.setProcess(package)--返回PID 与 进程位数
+if pid ==  false then
+print(string.format("该程序<%s>未运行!",package.package))
+else
+print(string.format("进程PID[%s]  是否为64位[%s]",pid,isarm64))
+end
+
+local package = {
+["package"]="com.vng.pubgmobile",
+--替换为你的目标进程的可以填写包名 或 PID
+--和平精英通常可以用模式3
+["mem"]="2",--内存读写模式。(通常情况下模式3兼容性与效率最佳)   
+--【注意，如果发现不能写入内存更换2或1模式即可】
+--你想使用的内存读写方式目前支持3种
+--模式1
+--模式2
+--模式3
+}
+local pid,isarm64=gg.setProcess(package)--返回PID 与 进程位数
+if pid ==  false then
+print(string.format("该程序<%s>未运行!",package.package))
+else
+print(string.format("进程PID[%s]  是否为64位[%s]",pid,isarm64))
+end
+
+-------------------设置你要读写内存的进程----------------
+local load_ui=function(ui)
+    local reset = '\x1b[0m'
+    local red = '\x1b[31m'--红
+    local green = '\x1b[32m'--绿色
+    local yellow = '\x1b[33m'--黄色
+    local blue = '\x1b[34m'--蓝色
+    local uistr=""
+    for i=1,#ui do
+        uistr=uistr..
+        green..i..reset--绿色数字序号标记
+        .."."..ui[i].text.."\n"
+    end
+    print("-----------------------------------")
+    print(red.."日落半火")
+    print(uistr)
+    print("-----------------------------------")
+    ::kt::
+    io.write(red.."输入你要开启的功能数字序号回车:"..reset)--蓝色字体
+    local read=io.read()
+    if ui[tonumber(read)] then
+        pcall(ui[tonumber(read)]["function"])--开启对应功能
+        goto kt--重启
+      else
+        print("你输入的数字有误")
+        goto kt
+    end
+end
+
+
+
+
+
+
+local ui={--这里面添加你的功能
+    
+
+
+
+
+    [1]={
+        text="上色",--功能名称
+        ["function"]=function()--功能实现代码
+                 io.write("请输入你要修改的值:")local zhi=io.read()
+local  t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+local  tt = {0x36A288, 0x4}
+local  ttt = Get_Address(t, tt)
+gg.setValues({{address=ttt, flags=gg.TYPE_FLOAT,value=tonumber(zhi)}})--自定义修改f类型
+print("修改成功:"..zhi)
+            
+            print("上色开启成功!")
+            playMusic("上色开启成功!",3)--播放语音
+        end,
+    },
+
+
+
+    
+
+
+
+
+[2]={
+    text="微加速",--功能名称
+    
+    ["function"]=function()--功能实现代码
+    
+        io.write("请输入你要修改的值:")local zhi=io.read()
+local  t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+local  tt = {0x5D0470,0x30,0x450,0x1098+0x1A4C}
+local  ttt = Get_Address(t, tt)
+gg.setValues({{address=ttt, flags=gg.TYPE_FLOAT,value=tonumber(zhi)}})--自定义修改f类型
+        playMusic("微加速开启成功!",3)--播放语音
+    end,
+},
+
+[3]={
+    text="自改亮度",--功能名称
+    
+    ["function"]=function()--功能实现代码
+        io.write("请输入你要修改的值:")local zhi=io.read()
+local  t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+local  tt = {0x165620, 0x38}
+local  ttt = Get_Address(t, tt)
+gg.setValues({{address=ttt, flags=gg.TYPE_FLOAT,value=tonumber(zhi)}})--自定义修改f类型
+        playMusic("开启成功!",3)--播放语音
+        print("开启成功!")
+    end,
+},
+
+
+
+    
+
+    [4]={--这个数字5就是选择的数字。
+        text="自改静态广角",--功能名称
+        ["function"]=function()--功能实现代码
+        io.write("请输入你要修改的数值:")local zhi=io.read()
+
+local  so = gg.getRangesList("libUE4.so")[1].start--获取模块地址
+so=so+0x3232E38--偏移0x10000
+gg.setValues({{address=so, flags=gg.TYPE_FLOAT,value=tonumber(zhi)}})--自定义修改D类型
+playMusic("开启成功!",3)--播放语音
+print("开启成功!")    
+            --这里面粘贴你的代码。
+            
+            
+        end,
+    },
+    
+    [5]={--这个数字5就是选择的数字。
+        text="自改动态广角",--功能名称
+        ["function"]=function()--功能实现代码
+        io.write("请输入你要修改的值:")local zhi=io.read()
+local  t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+local  tt = {0x66C170,0x20,0x1030,0x2F8,0x170,0x33C}
+local  ttt = Get_Address(t, tt)
+gg.setValues({{address=ttt, flags=gg.TYPE_FLOAT,value=tonumber(zhi)}})--自定义修改f类型
+        playMusic("开启成功!",3)--播放语音
+        print("开启成功!")
+playMusic("开启成功",3)--播放语音
+print("开启成功")    
+            --这里面粘贴你的代码。
+            
+            
+        end,
+    },
+    
+    [6]={--这个数字5就是选择的数字。
+        text="手持聚点①",--功能名称
+        ["function"]=function()--功能实现代码
+        local t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+        local tt = {0x5BB2A8,0x440,0x1A0,0x0,0x770,0xB34}--你是动态基址的例子
+        local ttt = Get_Address(t, tt)
+        gg.setValues({{address=ttt, flags=gg.TYPE_DWORD,value=0}})
+        local t = gg.getRangesList("libUE4.so")[1].start--获取模块地址
+        local tt = {0x5BB2A8,0x4B0,0x1A0,0x0,0x770,0xB34}--你是动态基址的例子
+        local ttt = Get_Address(t, tt)
+        gg.setValues({{address=ttt, flags=gg.TYPE_DWORD,value=0}})
+        local tt = {0x5BB2A8,0x450,0x1A0,0x0,0x770,0xB34}--你是动态基址的例子
+        local ttt = Get_Address(t, tt)
+        gg.setValues({{address=ttt, flags=gg.TYPE_DWORD,value=0}})
+playMusic("开启成功!",3)--播放语音
+print("开启成功!")    
+            --这里面粘贴你的代码。
+            
+            
+        end,
+    },
+    
+    [7]={--这个数字5就是选择的数字。
+        text="手持聚点②",--功能名称
+        ["function"]=function()--功能实现代码
+        local t = gg.getRangesList("libUE4.so:bss")[1].start--获取模块地址
+        local tt = {0x66BEA0,0x8,0x48,0x20,0x770,0xB34}--你是动态基址的例子
+        local ttt = Get_Address(t, tt)
+        gg.setValues({{address=ttt, flags=gg.TYPE_DWORD,value=0}})
+        local t = gg.getRangesList("libUE4.so")[1].start--获取模块地址
+        local tt = {0x66BEA0,0x8,0x48,0x108,0x770,0xB34}--你是动态基址的例子
+playMusic("开启成功!",3)--播放语音
+print("开启成功!")    
+            --这里面粘贴你的代码。
+            
+            
+        end,
+    },
+    
+[8]={--这个数字5就是选择的数字。
+        text="退出",--功能名称
+        ["function"]=function()--功能实现代码
+            print("程序已退出！")
+            os.exit()--退出进程
+            
+            
+        end,
+    },
+    
+    
+
+}
+
+
+
+
+
+
+
+
+
+load_ui(ui)--加载ui
